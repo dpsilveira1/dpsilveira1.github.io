@@ -19,20 +19,11 @@
     </form>
 
     <py-script>
-        def update_result(event):
-            input_box = Element("operandOne")
-            operandOne = float(input_box.value)
-            result = Element("total")
-            result.write("The input is: " + str(operandOne))
-
-        # Call the update_result function when the input changes
         input_box = Element("operandOne")
-        input_box.element.addEventListener('input', update_result)
-
-        # Initialize the result with the initial value
-        update_result(None)
+        operandOne = float(input_box.value)
+        result = Element("total")
+        result.write("Hello! The input says: " + str(operandOne))
     </py-script>
 </body>
 </html>
-
 
