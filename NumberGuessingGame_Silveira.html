@@ -18,24 +18,11 @@
             <div name="result" id="result"></div>
         </form>
 
-        <p-config>
-            packages = ['numpy']
-        </p-config>
-        
         <py-script>
-            import micropip
-            import asyncio
+            import random
 
-            # Asynchronously install numpy
-            async def install_numpy():
-                await micropip.install('numpy')
-
-            # Install numpy and proceed after installation
-            asyncio.ensure_future(install_numpy())
-
-            # Import numpy after it's installed
-            import numpy as np
-            selection = np.random.randint(1, 101)  # Random number between 1 and 100
+            # Generate random number between 1 and 100
+            selection = random.randint(1, 100)
 
             from pyscript import when
 
