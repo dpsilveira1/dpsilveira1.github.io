@@ -1,53 +1,59 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
-        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-        <style>
-            label {
-                display: block;
-            }
-        </style>
-    </head>
-    <body>
-        <py-config>
-            packages = ["numpy"]
-        </py-config>
-        
-        <py-script>
-            # Install numpy and set the random number
-            import pyodide
-            await pyodide.loadPackage("numpy")
-            import numpy as np
-            selection = np.random.randint(1, 101)  # Random number between 1 and 100
-        </py-script>
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <py-config>
+        packages = ["numpy"]
+    </py-config>
+    
+    <py-script>
+        import numpy as np
+        import asyncio
 
-        <form>
-            <label for="guess">Guess:</label>
-            <input name="guess" id="guess">
-            <button type="button" id="submit">Check Guess</button>
-            <label for="result">Result:</label>
-            <div name="result" id="result"></div>
-        </form>
+        async def initialize_game():
+            global selection
+            # Generate a random number between 1 and 100
+            selection = np.random.randint(1, 101)
+            print(f"Random number generated: {selection}")  # Debugging
 
-        <py-script>
-            from pyscript import when
+        asyncio.ensure_future(initialize_game())
+    </py-script>
 
-            @when("click", selector="#submit")
-            def check_guess():
-                try:
-                    user_guess = int(Element("guess").value)
-                    result = Element("result")
+    <form>
+        <label for="guess">Guess:</label>
+        <input name="guess" id="guess">
+        <button type="button" id="submit">Check Guess</button>
+        <label for="result">Result:</label>
+        <div name="result" id="result"></div>
+    </form>
 
-                    if user_guess == selection:
-                        result.write("Congratulations! You guessed correctly.")
-                    elif user_guess > selection:
-                        result.write("Try again! Your guess was too high.")
-                    else:
-                        result.write("Try again! Your guess was too low.")
-                except ValueError:
-                    Element("result").write("Please enter a valid number!")
-        </py-script>
-    </body>
+    <py-script>
+        from pyscript import when
+
+        @when("click", selector="#submit")
+        def check_guess():
+            try:
+                user_guess = int(Element("guess").value)
+                result = Element("result")
+
+                if user_guess == selection:
+                    result.write("Congratulations! You guessed correctly.")
+                elif user_guess > selection:
+                    result.write("Try again! Your guess was too high.")
+                else:
+                    result.write("Try again! Your guess was too low.")
+            except ValueError:
+                Element("result").write("Please enter a valid number!")
+    </py-script>
+</body>
 </html>
+
 
