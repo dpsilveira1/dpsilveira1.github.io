@@ -10,10 +10,9 @@
     </style>
 </head>
 <body>
-    <py-config>
-        packages = ['numpy']
-    </py-config>
     <py-script>
+        import pyodide
+        await pyodide.loadPackage("numpy")
         import numpy as np
         selection = np.random.randint(0, 100, 1)[0]
     </py-script>
@@ -39,6 +38,5 @@
     </py-script>
 </body>
 </html>
-
 
 
