@@ -4,9 +4,9 @@
         <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <style>
-                label{
-                    display:block;
-                }
+            label{
+                display:block;
+            }
         </style>
     </head>
     <body>
@@ -23,6 +23,10 @@
         </p-config>
         
         <py-script>
+            import micropip
+            # Install numpy package
+            await micropip.install('numpy')
+
             import numpy as np
             selection = np.random.randint(1, 101)
 
@@ -40,3 +44,5 @@
         </py-script>
     </body>
 </html>
+
+
