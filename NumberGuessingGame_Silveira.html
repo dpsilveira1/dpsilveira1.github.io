@@ -23,16 +23,17 @@
         </p-config>
         
         <py-script>
-            import pyodide
+            import micropip
             import asyncio
 
+            # Asynchronously install numpy
             async def install_numpy():
-                # Load numpy package using pyodide.loadPackage
-                await pyodide.loadPackage('numpy')
+                await micropip.install('numpy')
 
-            # Use asyncio to schedule the loading of numpy
+            # Install numpy and proceed after installation
             asyncio.ensure_future(install_numpy())
 
+            # Import numpy after it's installed
             import numpy as np
             selection = np.random.randint(1, 101)  # Random number between 1 and 100
 
