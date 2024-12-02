@@ -23,14 +23,14 @@
         </p-config>
         
         <py-script>
-            import micropip
+            import pyodide
             import asyncio
 
             async def install_numpy():
-                # Install numpy package
-                await micropip.install('numpy')
+                # Load numpy package using pyodide.loadPackage
+                await pyodide.loadPackage('numpy')
 
-            # Use asyncio to schedule the installation of numpy
+            # Use asyncio to schedule the loading of numpy
             asyncio.ensure_future(install_numpy())
 
             import numpy as np
@@ -54,5 +54,4 @@
         </py-script>
     </body>
 </html>
-
 
