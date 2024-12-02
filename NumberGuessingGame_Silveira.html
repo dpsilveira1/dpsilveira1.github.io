@@ -4,8 +4,8 @@
         <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <style>
-            label{
-                display:block;
+            label {
+                display: block;
             }
         </style>
     </head>
@@ -24,17 +24,27 @@
         
         <py-script>
             import micropip
-            # Install numpy package
-            await micropip.install('numpy')
+            import asyncio
+
+            async def install_numpy():
+                # Install numpy package
+                await micropip.install('numpy')
+
+            # Use asyncio to schedule the installation of numpy
+            asyncio.ensure_future(install_numpy())
 
             import numpy as np
-            selection = np.random.randint(1, 101)
+            selection = np.random.randint(1, 101)  # Random number between 1 and 100
 
             from pyscript import when
+
             @when("click", selector="#submit")
             def check_guess():
+                # Get user input
                 user_guess = int(Element("guess").value)
                 result = Element("result")
+
+                # Compare guess with random selection and display result
                 if user_guess == selection:
                     result.write("Congratulations! You guessed correctly.")
                 elif user_guess > selection:
